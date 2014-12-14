@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
-		rigidbody.MovePosition ( transform.position + transform.forward * Time.deltaTime * speed);
+				rigidbody.MovePosition (transform.position + transform.forward * Time.deltaTime * speed);
+				if (Input.GetButtonDown ("Fire1")) {
+						GetComponent<Animator> ().SetTrigger ("JUMP");
+				}
+				if (Input.GetButtonDown ("Fire2")) {
+						GetComponent<Animator> ().SetTrigger ("SLIDE");
+				}
+
 		}
 }

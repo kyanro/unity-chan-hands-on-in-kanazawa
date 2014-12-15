@@ -24,10 +24,15 @@ public class Player : MonoBehaviour
 				}
 		}
 
-	void OnTriggerEnter (Collider collider)
-		     {
-				GetComponent<Animator> ().SetTrigger ("DAMAGED");
-				speed = 0;
+		void OnTriggerEnter (Collider collider)
+		{
+				var stateInfo = GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0);
+				bool isRun = stateInfo.IsName ("Base Layer.RUN00_F");
+
+				if (isRun) {
+						GetComponent<Animator> ().SetTrigger ("DAMAGED");
+						speed = 0;
+				}
 		}
 
 }

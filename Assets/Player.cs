@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * speed);
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.UpArrow))
         {
             GetComponent<Animator>().SetTrigger("JUMP");
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") || Input.GetKeyDown(KeyCode.DownArrow))
         {
             GetComponent<Animator>().SetTrigger("SLIDE");
         }

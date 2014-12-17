@@ -50,9 +50,18 @@ public class Player : MonoBehaviour
     void OnGUI() {
         var currentState = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
         if (currentState.IsName("Base Layer.WIN00")) {
-            if(GUI.Button(rect, "RESTART")) {
-                Application.LoadLevel(Application.loadedLevelName);
-            }
+            showRestartButton();
+        }
+        if (currentState.IsName("Base Layer.LOSE00")) {
+            showRestartButton();
+        }
+    }
+
+    void showRestartButton()
+    {
+        if (GUI.Button(rect, "RESTART"))
+        {
+            Application.LoadLevel(Application.loadedLevelName);
         }
     }
 

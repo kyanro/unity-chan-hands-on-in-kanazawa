@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * speed);
+
         if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.UpArrow))
         {
             GetComponent<Animator>().SetTrigger("JUMP");
@@ -28,12 +29,30 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        var animator = GetComponent<Animator>();
         var stateInfo = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
                 
         if (TakesDamage(stateInfo, collider))
         {
-            GetComponent<Animator>().SetTrigger("DAMAGED");
+            animator.SetTrigger("DAMAGED");
             speed = 0;
+        }
+
+        if (collider.CompareTag("Goal"))
+        {
+            animator.SetTrigger("GOAL");
+            speed = 0;
+        }
+
+    }
+
+    Rect rect = new Rect(0, Screen.height / 2 - 100, Screen.width, 200);
+    void OnGUI() {
+        var currentState = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        if (currentState.IsName("Base Layer.WIN00")) {
+            if(GUI.Button(rect, "RESTART")) {
+                Application.LoadLevel(Application.loadedLevelName);
+            }
         }
     }
 
